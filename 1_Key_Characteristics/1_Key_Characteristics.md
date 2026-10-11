@@ -12,15 +12,11 @@ Software System interacting with different components
 - Web Server
 - Application Server
 
----
-
 ## HLD
 
 - High Level Design
 - Overview of different components of system
 - And how they interact with each other
-
----
 
 ## LLD
 
@@ -29,8 +25,6 @@ Software System interacting with different components
 - Design Principles and Best Practises: SOLID, KISS, YAGNI, DRY etc
 - Design Patterns: 23 (Gang of Four)
 - Machine Coding Round
-
----
 
 ## Software Development Life Cycle/SDLC
 
@@ -282,7 +276,7 @@ Instagram:
 
 Next Topic ⟶
 
-# CAP Theorem
+## CAP Theorem
 
 - Consistency
 - Availability
@@ -292,11 +286,11 @@ Out of 3, Any Distributed System can have only 2
 
 - CP or AP
 
-## Partition Tolerance
+### Partition Tolerance
 
 - No Single Point of Failure
 - Given by Distributed System
 
-## CP Systems
+### CP Systems
 
-## AP Systems
+### AP Systems

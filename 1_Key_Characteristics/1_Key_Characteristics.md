@@ -33,7 +33,7 @@ Software System interacting with different components
 3. HLD Level Design - Architect
 4. LLD: Classes, Interfaces, Abstraction, Service Layer, Controller etc - CODE
 5. Unit Testing/Integration Testing
-7. Release
+6. Release
 
 ---
 
@@ -99,7 +99,7 @@ Requests will be Distributed:
 - Limited to capacity of a single server and involves downtime
 - Cheaper
 
-"Scheduled Maintainance: Website will be down at 1 AM - 3 AM on 29th Sept 2024"
+"Scheduled Maintenance: Website will be down at 1 AM - 3 AM on 29th Sept 2024"
 
 Eg:
 
@@ -146,7 +146,7 @@ On Premises:
 
 Cost:
 - Cleaning
-- Maintainance Servers
+- Maintenance Servers
 
 ### Cloud Computing
 
@@ -271,26 +271,3 @@ Instagram:
 
 - Eventually, you will see the updated posts
 - Stale Data/Old Posts: Okay
-
----
-
-Next Topic ⟶
-
-## CAP Theorem
-
-- Consistency
-- Availability
-- Partition Tolerance: Distributed Systems (Fault Tolerance)
-
-Out of 3, Any Distributed System can have only 2
-
-- CP or AP
-
-### Partition Tolerance
-
-- No Single Point of Failure
-- Given by Distributed System
-
-### CP Systems
-
-### AP Systems

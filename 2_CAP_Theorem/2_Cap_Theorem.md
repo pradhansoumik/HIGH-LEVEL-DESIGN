@@ -8,12 +8,12 @@ Out of 3, Any Distributed System can have only 2
 
 - CP or AP
 
-## Partition Tolerance
+### Partition Tolerance
 
 - No Single Point of Failure
 - Given by Distributed System
 
-## CP or, AP Systems
+### CP or, AP Systems
 
 Talks about limitations on Distributed Databases.
 
@@ -34,30 +34,30 @@ For any Database in a Distributed System, Out of 3, It can have only 2
 
 ---
 
-# CP Systems
+## CP Systems
 
 - Consistency > Availability
 - Strong Consistency
 - My System goes down for sometime (non-available), I am fine with it
 - No Stale Data
 
-## Real Life Example
+### Real Life Example
 
 - Google Spanner
 - Google BigTable
 
-## Why is it a CP System?
+### Why is it a CP System?
 
 - Strong Consistency because of synchronised clocks,
 - and distributed across geo-locations
 - Hence, its a CP System
 
-## Examples
+### Examples
 
 - Food Delivery Service
 - Ride Finding Service
 
-## Financial Systems Example
+### Financial Systems Example
 
 Financial (Banking/Insurance/Trading) Systems ----- Transactions
 
@@ -71,18 +71,18 @@ Transaction: 100 USD
 - If in meantime, Bank App/ATM is not up for that user, its fine
 - No Stale Data to be Shown
 
-This is the classic CP behavior: the system prefers correctness over uptime.
+This is the classic CP behavior: the system prefers correctness over time.
 
 ---
 
-# AP Systems
+## AP Systems
 
 - Availability > Consistency
 - Eventual Consistency
 - My System MUST NOT Go Down
 - Stale Data
 
-## Real Life Example
+### Real Life Example
 
 Amazon Dynamo DB: AP System
 
@@ -91,9 +91,9 @@ Amazon Dynamo DB: AP System
 - Not Strong Consistent by default
 - AP System
 
-## Examples
+### Examples
 
-### Social Media
+#### Social Media
 
 - Homepage Service/News Feed: Always Available
 - Priority: App should be UP and Available for All Users

@@ -1,52 +1,31 @@
 ﻿# Database Concepts
 
-There are mainly two types of databases:
+There are mainly two Types of Databases:
 
 - SQL (Relational DB)
 - NoSQL (Non-Relational DB)
 
----
+## Relational DB
 
-## 1) Relational DB
+- Structural, have pre-defined schemas
+- Tabular form, particular no. of columns.
 
-Relational databases are structured and have predefined schemas.
+## Non-Relational DB
 
-Characteristics:
+- unstructural
+- No pre-defined schemas
 
-- Data is stored in tables with rows and columns
-- Every row follows the same structure
-- Best suited for structured and consistent data
+### Examples
 
-Examples:
-
-- MySQL
-- Oracle DB
-- MS SQL Server
-- Postgres
-- SQLite
-- MariaDB
-
-### Example: Bank Transactions
+#### 1) Bank Transaction
 
 | Sender_ID | Receiver_ID | UTR | Timestamp | Amount |
 |---|---|---|---|---|
 | 123 | 456 | A112 | 233939304 | 100 |
 
-All transactions follow the same structure, so this is a good fit for a SQL database.
+All Transactions have EXACTLY Same Structure: SQL DB
 
----
-
-## 2) NoSQL DB
-
-NoSQL databases are used for unstructured or semi-structured data. They do not require a fixed schema.
-
-Characteristics:
-
-- Flexible schema
-- Better for varied and dynamic data types
-- Common in modern distributed and large-scale systems
-
-### Example: Multiple Response Types
+#### 2) Multiple Response Type
 
 ```json
 req-1: {
@@ -59,15 +38,32 @@ req-2: {
 }
 ```
 
-These responses can have different structures, so this is a suitable use case for NoSQL.
+All Responses have Different Structure (un-structured responses): NoSQL DB
 
 ---
 
-## Types of NoSQL Databases
+## SQL: to store the structured data
 
-### A. Key-Value Store
+- Relational DB stores data in rows and columns
+- Rows: Records, Columns: Fields
+- Every Row has the same structure
 
-Data is stored as a set of key-value pairs.
+Examples:
+
+- MySQL
+- OracleDB
+- MS SQL Server
+- Postgres
+- SQLite
+- Maria DB
+
+---
+
+## NoSQL: to store the un-structured data
+
+### 1) Key-Value Store
+
+Data is stored in an array of key-value pairs.
 
 ```json
 {
@@ -84,81 +80,82 @@ Examples:
 - Couchbase
 - DynamoDB
 
-### B. Document Database
+### 2) Document Database
 
 - Data is stored in documents
-- Documents are grouped into collections
+- Documents are collected together as collections
 
 Examples:
 
 - MongoDB
 - CouchDB
 
-MongoDB Atlas concepts:
+MongoDB Atlas:
 
 - Collections
-- Indexed collections
+- Indexed Collections
 
-### C. Wide-Column Database
+### 3) Wide-Column Database
 
-- Instead of tables, columns act as containers for rows
-- Best used for large data sizes
+- Instead of tables, use columns as containers for rows
+- Best Used for LARGE DATA SIZE
 
 Examples:
 
 - Cassandra
 - HBase
 
-### D. Graph Database
+| Transaction ID: 122 | Sender_ID: 2333 | Receiver_ID: 323344 |
 
-- Relationships are represented as graphs
-- Data is stored in nodes and edges
+### 4) Graph Database
+
+- Databases where Relationships are the best represented in graphs (Vertices and Edges)
+- Data is saved in graph structures with nodes and vertices
 
 Examples:
 
-- Neo4j
+- Neo4J
 - InfiniteGraph
 
-> Reference: Database cheat sheet image shared earlier on WhatsApp / drive.
+> Refer: Database CheatSheet Image (Sent in WhatsApp - uploaded in our drive)
 
 ---
 
-## Scaling
+## Horizontal Scaling
 
-### Horizontal Scaling
+- Add more tables/resources
+- Partitioning/Sharding across different Servers
 
-- Add more machines or partitions
-- Spread data and load across multiple servers
-- Common in sharding or partitioning
+## Vertical Scaling
 
-### Vertical Scaling
-
-- Add more power to the same server or database instance
-- Usually done through indexing and bigger machines
+- Add more data into same tables/resources
+- Indexing
 
 ---
 
-## Geospatial Data
+## GeoSpatial
 
-Use cases:
+Uber, Doordash, Zomato etc
 
-- Uber
-- Doordash
-- Zomato
-- Finding the nearest restaurant
+Use Case:
 
-Concepts:
+- Need to find nearest restaurants
 
-- Static data: restaurants
-- Dynamic data: live rider location
-- Data structure: QuadTree
-- GeoSpatial DB: stores QuadTree data
+Static: Restaurants
+Dynamic: Live Location of Zomato Rider
+
+Data Structure: QuadTree
+GeoSpatial DB: Store QuadTree
 
 ---
 
 ## CAP Theorem
 
-CAP theorem states that it is impossible for a distributed software system to simultaneously provide more than two out of the following three guarantees:
+CAP Theorem States That:
+
+It is impossible for a "Distributed Software System" to simultaneously provide more than two out of three of the following scenarios:
+
+CAP:
 
 - Consistency (C)
 - Availability (A)
@@ -166,158 +163,474 @@ CAP theorem states that it is impossible for a distributed software system to si
 
 ### Consistency
 
-- All nodes or instances see the same data at the same time
-- Strong consistency means updates are propagated before reads are allowed
+- All Nodes/Instances see the exact same data at the same time
+- Consistency (Strong) is achieved by updating all nodes before allowing further reads
 
 ### Availability
 
-- Every request gets a response, whether success or failure
-- The system keeps running and avoids 5xx failures
-- Usually measured in uptime, such as 99.9999999% availability
+- Every request gets a response: success/non-success
+- Availability is achieved by having your system running up 24*7
+- No 5xx Error
+- 9 Times: 99.9999999
 
 ### Partition Tolerance
 
-- The system continues to work despite network failures or partial system outages
-- A partition-tolerant system continues to operate even if some nodes cannot communicate
-- Data is replicated to keep the system alive during intermittent failures
+- System continues to work despite data loss or partial failures
+- A System that is "Partition Tolerant" can sustain any amount of network failure that doesn't result in failure of Entire Network
+- Data is sufficiently replicated across combination of Nodes to keep the system up from intermittent changes
 
-A distributed system is generally considered partition tolerant by default.
+Distributed Software System -> Partition Tolerant (By Default)
 
-### Examples
-
-#### Amazon
+### Example: Amazon
 
 Cart -> Buy -> Address -> Payment
 
-If the payment service is not working, the add-to-cart functionality can still continue working. The entire system does not fail because one component is down.
+If Payment Service is not working, (one component is not working), "Adding to Cart" Functionality is still working (another component is still working)
 
-#### LinkedIn
+### Example: LinkedIn
 
-- Updating profile
-- Writing a post
-- Likes and comments
+- Updating DP, Writing Post, Likes, Comments
+- If Updating DP is not working, Writing Post is still working
 
-If profile updates are not working, writing a post can still function.
+### DB
 
-### Database Partitioning and Replicas
+- Database Partitioning (DBP) & Replicas (R)
 
-- Database Partitioning (DBP)
-- Replicas (R)
+  - DBP-1:
+    - Replicas: DBP-1_R1, DBP-1_R2
 
-Example:
-
-- DBP-1: Replicas DBP-1_R1, DBP-1_R2
-- DBP-2: Replicas DBP-2_R1, DBP-2_R2
+  - DBP-2:
+    - Replicas: DBP-2_R1, DBP-2_R2
 
 ---
 
-## Reasoning Behind CAP Theorem
+## Reasoning of CAP Theorem
 
-### Scenario 1: If we choose Consistency
+### Consistency
 
-All nodes are updated first before returning a response.
+- All Nodes should see the same set of updates in same order: Strong Consistency
 
-This means the nodes are temporarily unavailable while data is being synchronized.
+### 2 Scenarios
 
-Result: strong consistency, but reduced availability.
+#### 1) If we have Consistency
 
-### Scenario 2: If we choose Availability
+Means, all Nodes will be updated first before giving back response.
+That means, my nodes will NOT be Available for that time being.
 
-All nodes may not have the latest data.
+-- 2/3 [2 out of 3]
 
-This means stale data may be returned to some clients.
+#### 2) If we have Availability
 
-Result: high availability, but reduced consistency.
+Means All Nodes will Not have Latest Data.
+This will serve Stale Data.
 
-So in practice, distributed systems must choose two of the three constraints depending on the business need.
+That means, it will NOT be Consistent.
 
-> Reference research papers: Google Spanner, Google Borg / Kubernetes
+-- 2/3 [2 out of 3]
+
+> Refer - Research Paper:
+> - Google Spanner
+> - Google Borg -> Kubernetes
 
 ---
 
 ## Data Partitioning
 
-### What is it?
+### What?
 
-Data partitioning is a technique of breaking a large database into smaller parts and distributing them across multiple machines or servers.
+- Technique to break a big database (DB) into smaller parts
+- Process of splitting up a DB across Multiple Machines/Servers
 
-### Why do we need it?
+### Why?
 
-After a certain scale, horizontal scaling becomes more feasible than keeping everything in a single database.
+After a certain scale, it is more feasible to scale horizontally.
 
-Example:
+Server-1: 100 Tables
 
-- Server-1: 100 tables
-- Join is easier
+- JOIN: Easy
 
-Then after split:
+Server-1: 50 tables
 
-- Server-1: 50 tables
-- Server-2: 50 tables
+AND,
 
-Join becomes more difficult across shards.
+Server-2: 50 tables
+
+- JOIN: Difficult
+
+---
 
 ## Partitioning Methods
 
-### A. Horizontal Partitioning / Data Sharding
+### A) Horizontal Partitioning / Data Sharding
 
-Split different rows or tables across multiple servers.
+- Put Different Tables / Rows into Different Servers
 
 Example:
 
-- Data of restaurants across the world
-- Partition based on ZIP code
+- We have a data of all the restaurants in the world
+- Locations are based upon ZIP Codes in DB
 
-```text
-ZIP Code 0-9999 => Server-1
-ZIP Code 10000-19999 => Server-2
+*** Horizontal Partitioning: ***
+
+Storing locations in DB as per ZIP Codes
+
+| S No | Name | Contact | Zip Code |
+|---|---|---|---|
+| 1 | Mn Rows | ... | ... |
+
+- ZIP Code is used as a Partition Key
+
+ZIP Code > 0 and < 10000: Server-1
+ZIP Code > 10000 and < 20000: Server-2
+
+DB-1: Instance: ZIP Code > 0 and < 10000
+DB-2: Instance: ZIP Code > 10000 and < 20000
+
+#### Disadvantages
+
+`Uneven Distributed Load`
+
+- If Wrong Partition Logic is Used, it will lead to Un-Evenly Distributed Data
+
+It might contain 100 Rows & 10k Rows:
+
+- ZIP Code > 0 and < 10000: Server-1 -> 100 Rows
+- ZIP Code > 10000 and < 20000: Server-2 -> (1 Mn - 10k) Rows
+
+*** Query on DB-2 will be slower than Query on DB-1 ***
+
+---
+
+### B) Vertical Partitioning
+
+- Divide our Database/Tables related to a specific feature in their own server.
+
+Example:
+
+Building Instagram:
+
+- User Data: DB-1
+- Photos they Upload: DB-2
+- Followers and Following: DB-3
+
+#### User Data: DB-1
+
+> Probably a Relational DB
+
+Schema:
+
+| User_UUID | Name | Email | Phone |
+|---|---|---|---|
+| ... | ... | ... | ... |
+
+#### Photos They Upload: DB-2
+
+> Probably a No-SQL DB
+
+Example: S3
+
+#### Followers and Following: DB-3
+
+User-1 -> PK
+User-2
+
+Defined Schema/Structure
+
+- Relational DB can be choice
+- Might become difficult for celebrity users (> 10 M Followers)
+
+> Probably a Graph DB would be better.
+
+#### Disadvantages
+
+For Additional Application Users, it might require Further Partitioning
+
+Example:
+
+1 Bn Users -> 100 Bn Pics
+
+Cannot be stored in 1 DB Instance
+
+-> Divide across multiple DB Instances (Horizontal Partitioning)
+
+---
+
+## C) Directory Based Partitioning
+
+- Loosely coupled approach to solve the issues from both Horizontal and Vertical Partitioning
+- Create a lookup service which knows your current Partitioning and provides much easier access
+- To Find a Particular Data Entry -> Directory Service -> (Req: Resp[DB-Partition])
+
+Key: tuple
+Value: DB Server
+
+Example:
+
+In Vertical Partitioning,
+
+- If data for UUID_123 is stored in DB-189
+- First, Directly lookup in Directory Service -> Go to DB-189
+
+In Horizontal Partitioning,
+
+- If data for ZIP 123456 in DB-289
+- First, Directly lookup in Directory Service -> Go to DB-289
+
+Hashmap:
+
+- ZIP123456 -> DB-289: Horizontal
+- ZIP123457 -> DB-290: Horizontal
+- UUID_123 -> DB-189: Vertical
+- UUID_457 -> DB-190: Vertical
+
+### Disadvantages
+
+1. For Any Update in Entries (Addition/Deletion) in DB, Directory Service needs to be updated
+2. Huge Size of Multiple Key-Value Pairs - Might Need to Further Partition
+
+---
+
+## Partitioning Criteria / Implementation
+
+> Which column should be used to determine the partition. It will be applicable to both horizontal and vertical partitioning.
+
+### 1) Key Based / Hash Based Partitioning
+
+- Apply a Hash Function to some key attributes (columns) to give a Partition Number
+- Store data in corresponding database with Partition Number
+
+Example:
+
+1 Huge DB -> 100 DB Partitions (based on load - how much data I have, we can determine the partitions)
+
+S_No: (Numeric Value)
+
+Everytime a row is inserted, S_No is incremented by 1
+
+"Hash Function: S_No % Size_of_Partitions"
+
+>>> Hash Function: S_No % 100
+
+115th Record -> 115 % 100 = 15th DB Partition
+1085th Record -> 1085 % 100 = 85th DB Partition
+
+#### Advantages
+
+"Hash Function: S_No % Size_of_Partitions"
+
+- Evenly Distributed Data
+
+#### Disadvantages
+
+Before: Size_of_Partitions = 100
+After: Size_of_Partitions = 200 or Size_of_Partitions = 50
+
+Add New Partition / Delete Partition -> Change the Hash Function -> Re-Hashing
+
+#### Solution
+
+>>> Consistent Hashing
+
+---
+
+### 2) List Based Partitioning
+
+- Each DB Partition is assigned a list of values
+- Whenever you want to insert a new record, we will see which partition contains our key and then store in that partition
+
+Example:
+
+Store Data of All Countries
+
+Multiple Ways to do it:
+
+1. Based Upon Countries - Total: 195 Partitions
+   - Key: Country_ID (Key Based Partitioning)
+2. Based Upon Regions:
+   - Key: [List]
+
+List Partition: DB-1: Shenghen Countries - [France, Germany, Italy, Switzerland]
+List Partition: DB-2: Asian Countries - [India, China, Sri Lanka]
+
+Record:
+
+- 1 India GDP -> DB-2
+- 2 Italy GDP -> DB-1
+
+---
+
+### 3) Round-Robin Partitioning
+
+Req 1 -> DB Partition - 1
+Req 2 -> DB Partition - 2
+
+- Uniform Data Distribution across Instances
+- With N Partitions, ith row (row counter) is assigned to (i%n) partition
+- Req_ID % n
+
+---
+
+### 4) Composite/Hybrid Partitioning
+
+- Combine Any of the Above Partitioning Criterias
+
+Example:
+
+Problem:
+
+- If you need to store country wise data and then city wise data
+
+Solution:
+
+For Country Wise Queries:
+
+- First Apply List Based Partitioning
+
+For City Wise Queries:
+
+- Apply Hash Based Partitioning
+
+---
+
+## Problems of Data Partitioning
+
+- Operations (Queries) across Multiple Tables or Multiple Servers Across Different Servers/DB
+
+### JOIN
+
+Table-1:
+
+- User_Information
+
+| User_UUID | Name | Email | Address |
+|---|---|---|---|
+| 123 | DEV | dev@gmail.com | Menlo Park |
+
+Table-2:
+
+- User_Data
+
+| User_UUID | Pic_ID | Likes | Comments |
+|---|---|---|---|
+| 123 | abc | 2000 | 1000 |
+
+>>> Common Key: User_UUID -> JOIN is Possible
+
+Use Case:
+
+Tell me the name, pic, likes, comments of a Particular User
+
+Answer: JOIN
+
+Query:
+
+```sql
+SELECT User_UUID, Name, Email, Address, Pic_ID, Likes, Comments
+FROM User_Information
+JOIN User_Data
+WHERE User_Information.User_UUID = User_Data.User_UUID;
 ```
 
-This is called sharding by a partition key.
+Output:
 
-#### Disadvantage
+| User_UUID | Name | Email | Address | Pic_ID | Likes | Comments |
+|---|---|---|---|---|---|---|
+| 123 | DEV | dev@gmail.com | Menlo Park | abc | 2000 | 1000 |
 
-Uneven distribution of load can happen if partition logic is poor.
+#### A) JOINS
+
+- Performing joins across multiple tables in 1 machine: Easier
+- Performing joins across multiple tables in different machine: Difficult
+- Such joins will NOT be Performance Efficient: Why?
+  - Data needs to be fetched across multiple machines/servers: Slow
+
+Solution:
+
+- Indexing
+- Choosing the correct partitioning key
+
+#### B) Referential Integrity
+
+- Performing a cross-partitioning query on a partitioned database is NOT Easy
+- Includes enforcing Integrity Constraints as Foreign Keys in partitioned database can be difficult
+
+Integrity Constraints:
+
+1. Foreign Key MUST be present
+2. Should match the Type Across All Tables - (Int-Int, Long-Long, String-String)
+
+Problems:
+
+- Leads to Dangling Pointers (it was referring but there is no data now / was referring to a data which was present but not present anymore.)
+
+Solution:
+
+- Use Batch/Cron Jobs to clean up dangling references
 
 Example:
 
-- Server-1: 100 rows
-- Server-2: 10,000 rows
+Table-1: Partition-1
 
-Queries against Server-2 may become slower than Server-1.
+User_Information:
 
-### B. Vertical Partitioning
+| User_UUID | Name | Email | Address |
+|---|---|---|---|
+| 123 | DEV | dev@gmail.com | Menlo Park |
 
-Split database tables by feature or use case into separate servers.
+PK: User_UUID
 
-Example for Instagram:
+Table-2: Partition-2
 
-- User data: DB-1
-- Uploaded photos: DB-2
-- Followers and following: DB-3
+User_Data:
 
-This design separates concerns and allows each service or database to be optimized independently.
+| User_UUID | Pic_ID | Likes | Comments |
+|---|---|---|---|
+| 123 | abc | 2000 | 1000 |
 
-#### Disadvantage
+PK: Pic_ID
+FK: User_UUID
 
-As the user base grows, further partitioning may become necessary.
+Primary Key:
 
-Example:
+- Should not be NULL
+- Should not have duplicates
+- Can be Composite as Well
 
-- 1 billion users
-- 100 billion photos
+Purpose:
 
-This cannot be kept in a single DB instance efficiently.
+- Uniquely Identify a Row in a Table
+
+Foreign Key:
+
+- Not a Primary Key for current table
+- But is a Primary Key for some other table
+
+#### C) Rebalancing
+
+- There can be many reasons to rebalance our partitioned schema
+
+Original: 1 DB
+
+- Partition: 100 Partitions
+
+Change:
+
+- Partition: 100 -> 200
+- Partition: 100 -> 50
+
+*** Data Load determines the partition.***
 
 ---
 
 ## Indexing
 
-DB indexing allows us to reduce the number of records or rows that need to be searched when a query is executed.
+DB Indexing allows us to cut down the number of records/rows that needs to be searched/queried when a query is executed.
 
-In other words, indexing optimizes lookup time in a database table by reducing the number of operations needed to fetch a particular value.
+OR,
 
-> Reducing the number of operations it takes to get a particular value.
+Indexing in a DB just optimises my lookup time in a DB/Table.
+
+*** Reducing the number of operations it takes to get a particular value. ***
 
 ### Example
 
@@ -325,9 +638,9 @@ Table:
 
 | ID | Name | Email | Phone | Address |
 |---|---|---|---|---|
-| 1 | ... | ... | ... | ... |
+| ... | ... | ... | ... | ... |
 
-- Total records: 100 million
+- 100 Mn Records
 
 Query:
 
@@ -337,59 +650,62 @@ FROM Table
 WHERE Name = 'Dev';
 ```
 
-Behind the scenes:
+Behind the Scenes:
 
-- Every single row is checked to see whether `Name == 'Dev'`
-- This means a full table scan is performed
-- Full table scan: 100 million records
+Every Single Row/Record is checked to see if Name == 'Dev'
 
-> An index is a data structure that stores values for a specific column or columns of a table and helps us avoid a full table scan.
+- Whole Table is scanned (Sequential Search) -> Full Table Scan: 100 Mn Records
 
-### Indexing in a Book
+*** "An Index is a Data Structure that stores the values for a certain specific column/columns of a table and helps us to avoid a full table scan" ***
 
-#### 1. Original book
+### Example: Indexing in a Book
 
-- Pages: 1000
-- No chapters
-- Full table scan: 1000 pages
-- Lookup size: 1000 pages
+#### 1) Original
 
-#### 2. Indexing on chapters (Primary Indexing)
+- Pages: 1000 (Records)
+- There are No Chapters
+- Full Table Scan: 1000 Pages
+- Sample Size: 1000
+- Lookup Size: 1000 Pages
 
-- Pages: 1000
-- Chapter 1: Page 1-50
-- Chapter 2: Page 51-100
+#### 2) Indexing on Chapters - [PRIMARY INDEXING]
 
-If we need Chapter 2, the sample size becomes only 50 pages instead of 1000.
+- Pages: 1000 (Records)
+- Chap-1: Page: 1 - 50
+- Chap-2: Page: 51 - 100
 
-Lookup size: 50 pages
+You need to lookup Chap-2.
+Sample Size Becomes: 51-100 Pages: 50 Pages
 
-#### 3. Indexing on sub-chapters (Secondary Indexing)
+Lookup Size: 50 Pages
 
-- Chapter 1: Page 1-50
-  - SubChapter 1.1: Page 1-10
-  - SubChapter 1.2: Page 11-20
-- Chapter 2: Page 51-100
-  - SubChapter 2.1: Page 51-60
-  - SubChapter 2.2: Page 61-70
+#### 3) Indexing on Sub-Chapters - [SECONDARY INDEXING]
 
-Lookup size: 10 pages
+- Chap-1: Page: 1 - 50
+  - SubChapter-1.1: Page: 1 - 10
+  - SubChapter-1.2: Page: 11 - 20
+- Chap-2: Page: 51 - 100
+  - SubChapter-2.1: Page: 51 - 60
+  - SubChapter-2.2: Page: 61 - 70
 
-The goal of creating an index is:
+Lookup Size: 10 Pages
+Sample Size Becomes: 1-10 Pages: 10 Pages
 
-> To make it faster to search through the table and find the row(s) that we want.
+The Goal of Creating an Index is that:
+
+> "TO MAKE IT FASTER TO SEARCH THROUGH THE TABLE AND FIND THE ROW(S) THAT WE WANT"
 
 ---
 
 ## Create an Index
 
-### 1) Index on a single column
+### 1) On 1 single Column
 
 ```sql
 CREATE INDEX index_name ON TABLE (COL_NAME)
 ```
 
-### 2) Index on multiple columns
+### 2) On Multiple Columns
 
 ```sql
 CREATE INDEX index_name ON TABLE (COL_NAME1, COL_NAME2....)
@@ -397,8 +713,7 @@ CREATE INDEX index_name ON TABLE (COL_NAME1, COL_NAME2....)
 
 Note:
 
-- Indexes should be created on columns that are frequently fetched
-- Indexing has disadvantages as well
+Index should be created on a table if the data in the indexed column(s) is frequently fetched, because Indexing has disadvantages as well.
 
 ---
 
@@ -428,62 +743,79 @@ FROM BOOKS
 WHERE Writer = 'JK Rowling';
 ```
 
-Lookup size: 11 records
+Lookup Size: 11 [total 11 records in the above table]
 
-- Full table scan
+- Full Table Scan
 
-After indexing on the `Writer` column:
+Indexing:
+
+On Column - Writer
 
 ```sql
 CREATE INDEX writer_index ON BOOKS (Writer);
 ```
 
-The internal index structure looks like this:
+Index: writer_index
 
 | Search Key | Pointer |
 |---|---|
-| JK Rowling | [1, 2, 3, 4, 5, 11] |
-| GRR Martin | [6, 7, 8, 9, 10] |
+| JK Rowling | [1,2,3,4,5,11] |
+| GRR Martin | [6,7,8,9,10] |
 
-Lookup size: 6
+Lookup Size: 6
 
 ---
 
-## How Indexes Decrease Write Performance
+## How do Indexes Decrease Write Performance?
 
-An index can speed up data retrieval (read performance), but the index itself may become very large, which slows down write operations such as insertion, updation, and deletion.
+(1) An Index Can be used to speed up data Retreival (Read Performance),
+BUT may itself be VERY LARGE to too Large Size, which will slow down the Write Operations - Insertion, Updation and Deletion
 
-### Example
+Data Insertion: POST
+Updation: PUT
 
-When adding rows or updating records, we do not only update the database; we also update the index.
+While Adding rows or making updates to existing rows,
+We NOT ONLY have to update database, but also have to update the index.
 
-For every new data entry, index pointers need to be re-evaluated, which means re-indexing.
+Like, for new data entry index pointer needs to be re-evaluated -> re-indexing
 
 | Search Key | Pointer |
 |---|---|
-| JK Rowling | [1, 2, 3, 4, 5, 11, 12, 13] |
-| GRR Martin | [6, 7, 8, 9, 10] |
+| JK Rowling | [1,2,3,4,5,11,12,13] |
+| GRR Martin | [6,7,8,9,10] |
 
-This decreases write performance.
+-> This DECREASES the WRITE Performance <-
 
-Impact on write operations:
+This Performance Degradation applied to ALL WRITE Operations:
 
 - Insertion
 - Updation
 - Deletion
 
-Therefore:
+For this reason,
 
-- Adding unnecessary indexes on tables should be avoided
+Adding Unnecessary indexes on tables should be avoided.
 
-Use cases:
+Case Not to Use Indexed Heavily?
 
-- For write-heavy applications: avoid heavy indexing
-- For read-heavy applications: indexing is beneficial
+- For Write Heavy Applications
+
+Case to Use Indexed Heavily?
+
+- For Read Heavy Applications
 
 ---
 
-## Example: Updating Index After New Record
+## Example: add a new row
+
+Task:
+
+- Add 1 more row to the table, Need to Update in the Index as well
+
+```sql
+INSERT INTO BOOKS VALUES (,,,,,,);
+UPDATE writer_index ADD VALUES(,,,,,,,)
+```
 
 Table: BOOKS
 
@@ -500,77 +832,78 @@ Table: BOOKS
 | GRR Martin | Game of Thrones | 2010 |
 | GRR Martin | Game of Thrones | 2010 |
 | JK Rowling | Harry Potter | 2012 |
-| JK Rowling | Harry Potter | 2015 |
+| JK Rowling | Harry Potter | 2015 -> NEW RECORD |
 
-Indexing on column: Writer
+Indexing:
+
+On Column -> Writer
 
 | Search Key | Pointer |
 |---|---|
-| JK Rowling | [1, 2, 3, 4, 5, 11, 12] |
-| GRR Martin | [6, 7, 8, 9, 10] |
-
-This shows that when a new row is inserted, the index must also be updated.
+| JK Rowling | [1,2,3,4,5,11,12] |
+| GRR Martin | [6,7,8,9,10] |
 
 ---
 
 ## Data Structures Used for Indexing
 
-Different databases use different data structures to implement indexing.
+Different Databases have different data structures to implement indexing.
 
-### 1) B+ Trees (SQL-based)
+### 1) B+ Trees: SQL Based
 
-- Efficient for quick lookup, deletion, and insertion
-- Data stored is sorted
-- All operations: O(log N)
+- Efficient for quick lookup, deletion and insertion
+- Data Stored: Sorted
+- All Operation: O(log N)
 
 ### 2) Hash Tables
 
-Indices that use hash tables are called hash indexes.
+Indices which use Hash Tables are called Hash Index.
 
-In a hash index:
+In Hash Index (in above example):
 
-- Key: column value
-- Value: pointer to the rows
+- Key: Column Value
+- Value: Pointer to the Rows
 
-Characteristics:
-
-- Best-case complexity: O(1)
-- Worst-case complexity: O(log N)
-- Data is not sorted, so it may not be efficient for sorted queries
+- Best Case Complexity: O(1)
+- Worst Case Complexity: O(log N)
+- Not Sorted Data, might not be Efficient for certain type of queries (for sorted data)
 
 Example:
 
-- Results of a contest
-- Rank is sorted in order
+Result of Contest:
+
+- Rank - Sorted Order
 
 ### 3) R-Tree
 
-- Used in spatial databases
-- Useful for storing locations such as longitude and latitude
+- Spatial Databases (to store the locations)
+- Longitudes and Latitudes
 
-Query example:
+Queries Like:
 
-> "Cafes near me"
+> "Cafes Near Me"
 
-This means finding cafes within 5 miles.
+-> Find Cafe within 5 Miles
 
 ### 4) Bitmap Index
 
-Works for columns that have boolean values.
+Works for Columns that have boolean values.
 
-Example:
+Example: Column having boolean values
+
+True/False
 
 | Account_id | Is_Active |
 |---|---|
 | 123 | true |
 | 456 | false |
 
-This is useful when the column has a limited number of distinct values such as true/false.
-
 ---
 
 ## Final Note
 
-Indexing is extremely useful for read-heavy systems because it reduces lookup time and avoids full table scans. However, it comes with a cost: write performance can degrade because the index also needs to be maintained on inserts, updates, and deletes.
+The Goal of Creating an Index is that:
 
-That is why indexes must be chosen carefully based on the workload and access pattern of the system.
+> TO MAKE IT FASTER TO SEARCH THROUGH THE TABLE AND FIND THE ROW(S) THAT WE WANT
+
+This helps in reducing lookup time and avoiding full table scans, but it can also reduce write performance because indexes must be maintained during insert, update, and delete operations.
